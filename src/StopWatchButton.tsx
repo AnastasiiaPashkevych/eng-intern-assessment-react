@@ -1,7 +1,21 @@
 import React from 'react'
 
-export default function StopWatchButton() {
-    return(
-        <div></div>
-    )
+interface StopwatchButtonProps {
+    onStart: () => void;
+    onStop: () => void;
+    onReset: () => void;
+    onLap: () => void;
 }
+
+const StopWatchButton: React.FC<StopwatchButtonProps> = ({ onStart, onStop, onReset, onLap }) => {
+    return (
+        <div>
+            <button onClick={onStart}>Start</button>
+            <button onClick={onStop}>Stop</button>
+            <button onClick={onReset}>Reset</button>
+            <button onClick={onLap}>Lap</button>
+        </div>
+    );
+};
+
+export default StopWatchButton;
