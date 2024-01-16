@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import StopWatchButton from './StopWatchButton';
 
+interface StopwatchProps {}
+
+interface Lap {
+    id: number;
+    time: number;
+}
+
 export default function StopWatch() {
-    const [time, setTime] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
-    const [lapTimes, setLapTimes] = useState([]);
+    const [time, setTime] = useState<number>(0);
+    const [isRunning, setIsRunning] = useState<boolean>(false);
+    const [lapTimes, setLapTimes] = useState<Lap[]>([]);
 
     useEffect(() => {
-        let timer: any;
+        let timer: NodeJS.Timeout;
 
         if (isRunning) {
             timer = setInterval(() => {
@@ -33,7 +40,10 @@ export default function StopWatch() {
     };
 
     const recordLap = () => {
-        setLapTimes((prevLapTimes) => [...prevLapTimes, time]);
+        setLapTimes((prevLapTimes) => [
+            ...prevLapTimes,
+            { id: prevLapTimes.length + 1, time },
+        ]);
     };
 
     return (
@@ -50,8 +60,8 @@ export default function StopWatch() {
                 <div>
                     <h2>Lap Times:</h2>
                     <ul>
-                        {lapTimes.map((lap, index) => (
-                            <li key={index}>{`Lap ${index + 1}: ${lap} seconds`}</li>
+                        {lapTimes.map((lap) => (
+                            <li key={lap.id}>{`Lap ${lap.id}: ${lap.time} seconds`}</li>
                         ))}
                     </ul>
                 </div>
