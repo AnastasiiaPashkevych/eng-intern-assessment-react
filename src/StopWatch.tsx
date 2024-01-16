@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StopWatchButton from './StopWatchButton';
+import './StopWatch.css';
 
 interface StopwatchProps {}
 
@@ -47,9 +48,8 @@ export default function StopWatch() {
     };
 
     return (
-        <div>
-            <h1>Stopwatch</h1>
-            <div>{`Time: ${time} seconds`}</div>
+        <div className="stopwatch-container">
+            <div  className="time-display">{`Time: ${time} seconds`}</div>
             <StopWatchButton
                 onStart={startStopwatch}
                 onStop={stopStopwatch}
